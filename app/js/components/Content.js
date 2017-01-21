@@ -8,13 +8,11 @@ export default class Content extends Component {
 
   render() {
 
-    const displayState = this.props.visible ? {display: ''} : {display: 'none'};
-
-
+    const displayState = this.props.visible ? {display: '', color: 'white'} : {display: 'none'};
 
     return (
       <div style={displayState}>
-         Hello
+         {this.props.word}
       </div>
     );
   }

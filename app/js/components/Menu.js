@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import Content from './Content'
+import Content from './Content';
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: black;
+`;
 
 export default class Menu extends Component {
 
@@ -14,18 +20,21 @@ export default class Menu extends Component {
     this.showContent = this.showContent.bind(this);
   }
 
-  showContent(){
+  showContent(word){
     this.setState({
-      visible: !this.state.visible
+      visible: !this.state.visible,
+      word: word
     })
   }
   render() {
     const { hello, galaxy } = this.state;
     return (
       <div>
-        <Button onClick={this.showContent}>{hello}</Button>
-        <Button>{galaxy}</Button>
-        <Content visible={this.state.visible}/>
+        <Button onClick={()=> this.showContent(hello)}>{hello}</Button>
+        <Button onClick={()=> this.showContent(galaxy)}>{galaxy}</Button>
+        <Wrapper>
+          <Content visible={this.state.visible} word={this.state.word}/>
+        </Wrapper>
       </div>
     );
   }
