@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Jumbotron from './Jumbotron';
 
 export default class Content extends Component {
 
@@ -12,7 +13,7 @@ export default class Content extends Component {
 
     return (
       <div style={displayState}>
-         {this.props.word}
+          <Jumbotron>{this.props.word}</Jumbotron>
       </div>
     );
   }

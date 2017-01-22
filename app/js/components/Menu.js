@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import Button from './Button';
+import Main from './Main';
 import Content from './Content';
-import styled from 'styled-components';
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: black;
-`;
+import { ThemeProvider } from 'styled-components'
+import Grid from 'grid-styled'
+import Navigation from './Navigation';
 
 export default class Menu extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      hello: 'hello',
-      galaxy: 'galaxy',
+      about: 'about',
+      barista: 'barista',
       visible: false
     }
     this.showContent = this.showContent.bind(this);
@@ -26,16 +24,41 @@ export default class Menu extends Component {
       word: word
     })
   }
+
   render() {
-    const { hello, galaxy } = this.state;
+    const { about, barista } = this.state;
     return (
-      <div>
-        <Button onClick={()=> this.showContent(hello)}>{hello}</Button>
-        <Button onClick={()=> this.showContent(galaxy)}>{galaxy}</Button>
-        <Wrapper>
-          <Content visible={this.state.visible} word={this.state.word}/>
-        </Wrapper>
-      </div>
+      <ThemeProvider
+        theme={{
+          gutter: 0,
+          breakpoints: {
+            small: '32em',
+            medium: '48em',
+            large: '64em'
+          }
+        }}>
+
+        <div>
+
+          <Navigation>
+            <Grid sm={1/6}>
+              <Button onClick={()=> this.showContent(about)}>{about}</Button>
+            </Grid>
+
+            <Grid sm={5/6}>
+              <Button onClick={()=> this.showContent(barista)}>{barista}</Button>
+            </Grid>
+          </Navigation>
+
+          <Main>
+            <Grid sm={6/6}>
+            <Content visible={this.state.visible} word={this.state.word}/>
+            </Grid>
+          </Main>
+
+        </div>
+      </ThemeProvider>
+
     );
   }
 }
